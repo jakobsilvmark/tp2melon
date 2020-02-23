@@ -29,7 +29,8 @@ const initialState={
         }
         onSubmit =(e)=>{
             const {email, password} =this.state;
-            this.props.firebase.doSignInWithEmailAndPassword(email, password)
+            this.props.firebase
+            .doSignInWithEmailAndPassword(email, password)
             .then(()=> {
                 this.setState({...initialState});
                 this.props.history.push(routes.home);

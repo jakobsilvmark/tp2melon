@@ -5,7 +5,7 @@ import { fromRenderProps } from 'recompose';
 import * as routes from "../Constants/Routes.js";
 
 
-function PwordForgot() {
+const PwordForgot = ()=> {
     return (
         <div>
             <h1> Forgot Password?</h1>
@@ -25,7 +25,9 @@ class PasswordForgotFormBase extends Component{
     }
     onSubmit = (e)=>{
         const {email}=this.state;
-        this.props.firebase.doPasswordreset(email).then(()=>
+        this.props.firebase
+        .doPasswordreset(email)
+        .then(()=>
         {
             this.setState({...initialState});
         })
@@ -64,5 +66,5 @@ const PasswordForgotLink =() =>(
 );
 
 export default PwordForgot;
-const PasswordForgotForm=withFirebase(PasswordForgotFormBase);
+const PasswordForgotForm = withFirebase(PasswordForgotFormBase);
 export {PasswordForgotForm, PasswordForgotLink};

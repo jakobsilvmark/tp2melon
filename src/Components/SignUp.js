@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from "react-router-dom";
 import{compose} from "recompose";
-import {withFirebase} from "./FirebaseIndex.js"
-import * as routes from "../Constants/Routes.js"
+import {withFirebase} from "./FirebaseIndex.js";
+import * as routes from "../Constants/Routes.js";
+import * as Roles from "../Constants/Roles.js";
 
 function SignUp() {
     return (
@@ -16,6 +17,7 @@ function SignUp() {
         email:"",
         passwordOne:"",
         passwordTwo:"",
+        isAdmin: false,
         error: null,
     };
 
@@ -25,9 +27,20 @@ class SignUpFormBase extends Component{
         this.state={...initialState};
     }
     onSubmit=(e)=>{
-        const {username, email, passwordOne}=this.state;
-        this.props.firebase.doCreateUserWithEmailAndPassword(email, passwordOne)
+        const {username, email, passwordOne, isAdmin}=this.state;
+        const roles = [];
+
+        if (isAdmin){
+            roles.push(Roles.admin);
+        }
+        this.props.firebase
+         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(authUser=> {
+
+            return this.props.firebase.user(authUser.user.id)
+            .set({username, email, roles});
+        })
+        .then (()=> {
             this.setState({...initialState});
             this.props.history.push(routes.home);
         })
@@ -42,9 +55,17 @@ class SignUpFormBase extends Component{
             [e.target.name]:e.target.value
         });
     };
+    onChangeCheckbox= (e)=>{
+        this.setState({[e.target.name]: e.target.checked});
+    }
     render(){
-        const {username, email, passwordOne, passwordTwo, error,}
-            =this.state;
+        const {username, 
+               email, 
+               passwordOne, 
+               passwordTwo, 
+               isAdmin, 
+               error,} =this.state;
+               
         const isInvalid=
             passwordOne !== passwordTwo || passwordOne === "" ||
             email === "" || username ==="";
@@ -71,6 +92,16 @@ class SignUpFormBase extends Component{
                         onChange={this.onChange}
                         type="password"
                         placeholder="Cornfirm Password"/>
+                <label>
+                    Admin:
+                    <input
+                     name="isAdmin"
+                     type="checkbox"
+                     checked={isAdmin}
+                     onChange={this.onChangeCheckbox}
+                     />
+                    
+                </label>
                 <button disabled={isInvalid}type="submit">Sign Up</button>
                 {error && <p>{error.message}</p>}
                 

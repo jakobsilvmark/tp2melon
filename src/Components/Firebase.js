@@ -1,5 +1,7 @@
 import app from "firebase/app";
 import "firebase/auth";
+import "firebase/database";
+import * as Roles from "../Constants/Roles.js";
 
 const config ={
     
@@ -13,11 +15,12 @@ const config ={
         measurementId: "G-2J01KFMVG7"
      
 };
- class Firebase{
+class Firebase{
      constructor(){
          app.initializeApp(config);
 
          this.auth=app.auth();
+         this.db=app.database();
      }
      doCreateUserWithEmailAndPassword = (email, password) =>
      this.auth.createUserWithEmailAndPassword(email, password);
@@ -30,5 +33,36 @@ const config ={
      doPasswordReset= email=> this.auth.sendPasswordResetEmail(email);
 
      doPasswordUpdate=password=> this.auth.currentUser.updatePassword(password);
- }
+
+     onAuthUserListener=(next, fallback) => this.auth.onAuthStateChanged(
+         authUser=>{
+             if (authUser){
+                 this.user(authUser.uid)
+                 .once("value")
+                 .then(snapshot=>{
+                     const dbUser=snapshot.val();
+                     
+                      if(!dbUser.roles){
+                          dbUser.roles=[]
+                      }
+                      authUser={
+                          uid: authUser.uid,
+                          email:authUser.email,
+                          ...dbUser,
+                      }
+                      next(authUser);
+                 });
+                 
+             } else {
+                 fallback();
+             }
+         }
+     );
+    
+    
+    
+     user = uid => this.db.ref(`users/${uid}`);
+
+     users = ()=> this.db.ref("users");
+}
 export default Firebase;
