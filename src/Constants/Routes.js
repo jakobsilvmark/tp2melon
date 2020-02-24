@@ -5,3 +5,4 @@ export const home = "/home";
 export const users = "/users";
 export const admin = "/admin";
 export const pwforgot = "/pwforgot";
+export const admindetails="/admin/:id"
