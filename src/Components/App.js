@@ -11,9 +11,14 @@ import Admin from "./Admin.js";
 import PwordForgot from "./PwordForgot.js";
 import {withAuthentication} from "./SessionIndex";
 import * as routes from "../Constants/Routes.js";
+import styled from "styled-components";
 
 
-
+const Hr = styled.hr`
+  
+  border: 2px solid white;
+  margin: 0;
+`;
 
 
 
@@ -25,7 +30,7 @@ const App = () =>{
         <Router>
           <div>
             <Navigation/>
-            <hr />
+            <Hr />
             
               <Route exact path="/" component = {Landing}/>
               <Route  path="/signin" component = {SignIn}/>

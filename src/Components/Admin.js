@@ -5,17 +5,40 @@ import*as Roles from "../Constants/Roles.js";
 import {compose} from "recompose";
 import {withAuthorization} from "./SessionIndex";
 import * as routes from "../Constants/Routes.js";
+import styled from "styled-components";
 
+const Div = styled.div`
+  background-color:#F7DC6F;
+  margin 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+`;
+const H1 = styled.h1`
+  text-align: center;
+  font-family: "VT323";
+`;
+const H2 = styled.h2`
+  text-align: center;
+  font-family: "VT323";
+`;
+const Ul = styled.ul`
+  text-align: left;
+  font-family: "VT323";
+  font-size: 28px;
+`;
 const AdminPage = () => (
-    <div>
-      <h1>Admin</h1>
+    <Div>
+      <H1>Admin</H1>
       <p>The Admin Page is accessible by every signed in admin user.</p>
   
       <Switch>
         <Route exact path={routes.admindetails} component={UserItem} />
         <Route exact path={routes.admin} component={UserList} />
       </Switch>
-    </div>
+    </Div>
   );
 
 class UserListBase extends Component{
@@ -51,10 +74,10 @@ class UserListBase extends Component{
     render(){
         const {users, loading}=this.state;
         return(
-            <div>
-        <h2>Users</h2>
+            <Div>
+        <H2>Users</H2>
         {loading && <div>Loading ...</div>}
-        <ul>
+        <Ul>
           {users.map(user => (
             <li key={user.uid}>
               <span><strong>ID:</strong> {user.uid}</span>
@@ -72,8 +95,8 @@ class UserListBase extends Component{
               </span>
             </li>
           ))}
-        </ul>
-      </div>
+        </Ul>
+      </Div>
             
         );
     }

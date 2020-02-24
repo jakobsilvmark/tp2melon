@@ -5,12 +5,48 @@ import {withFirebase} from "./FirebaseIndex.js";
 import * as routes from "../Constants/Routes.js";
 import * as Roles from "../Constants/Roles.js";
 
+import styled from "styled-components";
+
+const Div = styled.div`
+  background-color:#F7DC6F;
+  margin 40px;
+  align-text: centre;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+`;
+const H1 = styled.h1`
+  text-align: center;
+  font-family: "VT323";
+`;
+const Form = styled.form`
+font-size:18px;
+margin: 0 30%;
+`;
+const Button = styled.button`
+  background-color:white;
+  font-family: "VT323";
+  border-radius: 5px;
+  margin: 10px 42%;
+  width: 100px;
+  padding: 5px;
+`;
+const Input = styled.input`
+  text-align: center;
+  font-family: "VT323";
+  border-radius: 5px;
+  width:200px;
+  margin: 5px 30%;
+  padding:8px;
+ `;
+
 function SignUp() {
     return (
-        <div>
-            <h1> Sign Up</h1> 
+        <Div>
+            <H1> Sign Up</H1> 
             <SignUpForm />}
-       </div>
+       </Div>
     )};
     const initialState={
         username:"",
@@ -71,30 +107,30 @@ class SignUpFormBase extends Component{
             email === "" || username ==="";
         
         return(
-            <form onSubmit={this.onSubmit}>
-                <input name="username" 
+            <Form onSubmit={this.onSubmit}>
+                <Input name="username" 
                         value={username}
                         onChange={this.onChange}
                         type="text"
                         placeholder="Full Name"/>
-                <input name="email" 
+                <Input name="email" 
                         value={email}
                         onChange={this.onChange}
                         type="text"
                         placeholder="Email"/>
-                <input name="passwordOne" 
+                <Input name="passwordOne" 
                         value={passwordOne}
                         onChange={this.onChange}
                         type="password"
                         placeholder="Password"/>
-                <input name="passwordTwo" 
+                <Input name="passwordTwo" 
                         value={passwordTwo}
                         onChange={this.onChange}
                         type="password"
                         placeholder="Cornfirm Password"/>
                 <label>
                     Admin:
-                    <input
+                    <Input
                      name="isAdmin"
                      type="checkbox"
                      checked={isAdmin}
@@ -102,10 +138,10 @@ class SignUpFormBase extends Component{
                      />
                     
                 </label>
-                <button disabled={isInvalid}type="submit">Sign Up</button>
+                <Button disabled={isInvalid}type="submit">Sign Up</Button>
                 {error && <p>{error.message}</p>}
                 
-            </form>
+            </Form>
         );
     }
 }

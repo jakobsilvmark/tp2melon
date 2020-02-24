@@ -1,5 +1,28 @@
 import React, {Component} from 'react';
 import {withFirebase} from "./FirebaseIndex.js";
+import styled from "styled-components";
+
+
+const Form = styled.form`
+font-size:18px;
+margin: 0 30%;
+`;
+const Button = styled.button`
+  background-color:white;
+  font-family: "VT323";
+  border-radius: 5px;
+  margin: 10px 38%;
+  width: 150px;
+  padding: 5px;
+`;
+const Input = styled.input`
+  text-align: center;
+  font-family: "VT323";
+  border-radius: 5px;
+  width:200px;
+  margin: 5px 30%;
+  padding:8px;
+ `;
 
 
 const initialState={
@@ -39,28 +62,28 @@ class PwordChangeForm extends Component {
         passwordOne ==="";
 
         return (
-            <form onSubmit = {this.onSubmit}>
-                <input 
+            <Form onSubmit = {this.onSubmit}>
+                <Input 
                   name="passwordOne"
                   value={passwordOne}
                   onChange={this.onChange}
                   type="password"
                   placeholder="New Password"/>
 
-                <input 
+                <Input 
                   name="passwordTwo"
                   value={passwordTwo}
                   onChange={this.onChange}
                   type="password"
                   placeholder="Confirm New Password"/>
 
-                <button disabled={isInvalid} type="submit">
+                <Button disabled={isInvalid} type="submit">
                     Reset My Password
-                </button>
+                </Button>
 
                 {error && <p> {error.message}</p>}
 
-            </form>
+            </Form>
         );
     }
 }

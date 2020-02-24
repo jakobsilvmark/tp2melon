@@ -1,12 +1,21 @@
 import React from 'react';
 import {withFirebase} from "./FirebaseIndex.js";
 
+import styled from "styled-components";
+
+const Button = styled.button`
+  background-color:white;
+  font-family: "VT323";
+  border-radius: 5px;
+  
+  padding: 5px;
+`;
 
 
 const SignOutButton=({firebase})=>(
-    <button type ="button" onClick={firebase.doSignOut}>
+    <Button type ="button" onClick={firebase.doSignOut}>
         Sign Out
-    </button>
+    </Button>
 )
 
 

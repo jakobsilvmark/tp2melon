@@ -3,6 +3,29 @@ import {Link} from "react-router-dom";
 import {withFirebase} from "./FirebaseIndex.js";
 import { fromRenderProps } from 'recompose';
 import * as routes from "../Constants/Routes.js";
+import styled from "styled-components";
+
+
+const Form = styled.form`
+font-size:18px;
+margin: 0 30%;
+`;
+const Button = styled.button`
+  background-color:white;
+  font-family: "VT323";
+  border-radius: 5px;
+  margin: 10px 34%;
+  width: 150px;
+  padding: 5px;
+`;
+const Input = styled.input`
+  text-align: center;
+  font-family: "VT323";
+  border-radius: 5px;
+  width:200px;
+  margin: 5px 24%;
+  padding:8px;
+ `;
 
 
 const PwordForgot = ()=> {
@@ -43,19 +66,19 @@ class PasswordForgotFormBase extends Component{
         const {email, error}=this.state;
         const isInvalid = email==="";
         return(
-            <form onSubmit ={this.onSubmit}>
-                <input
+            <Form onSubmit ={this.onSubmit}>
+                <Input
                 name="email"
                 value={this.state.email}
                 onChange={this.onChange}
                 type="text"
                 placeholder="Email" />
 
-                <button disabled={isInvalid} type ="submit">
+                <Button disabled={isInvalid} type ="submit">
                     Reset my Password
-                </button>
+                </Button>
                 {error && <p>{error.message}</p>}           
-            </form>
+            </Form>
         )
     }
 }
