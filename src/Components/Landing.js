@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from "styled-components";
+import LandingAPI from '../APIs/LandingAPI.js';
 
 
 const Nav = styled.div`
@@ -73,8 +74,12 @@ function Landing() {
                     </NavRight>
                 </NavHeader>
             </Nav>
+          <div>
+          <LandingAPI/>
+          </div>
   
         </div>
+        
     )
 }
 
