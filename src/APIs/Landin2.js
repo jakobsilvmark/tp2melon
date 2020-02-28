@@ -25,19 +25,23 @@ const A = styled.a`
   width: 500px;
   
 `;
+const Span = styled.span`
+  height: 40px;
+  width: 500px;
+  
+`;
 
+const API= 'https://financialmodelingprep.com/api/v3/company/profile/AAPL';
 
-
-
-const API= 'https://hn.algolia.com/api/v1/search?query=';
 const defaultQuery="redux";
 
-class LandingAPI extends Component {
+class Landing2 extends Component {
     constructor(props){
         super(props);
         this.state={
             
-            hits:[],
+            symbol:" ",
+            profile: {},
             isLoading: false,
             error: null,
             
@@ -56,17 +60,17 @@ class LandingAPI extends Component {
                 throw new Error("Something went wrong...")
             }
             })
-        .then (data=>{ this.setState({hits: data.hits, isLoading:false})})
+        .then (data=>{ this.setState({symbol: data.symbol, profile: data.profile, isLoading:false})})
         .catch(error => this.setState({error, isLoading: false}));
     }      
     
     render() {
-            const {hits, isLoading, error}=this.state;
+            const {symbol, profile, isLoading, error}=this.state;
             if (error){
             return <p> {error.message}</p>;
             }
             if (isLoading){
-                console.log(hits);
+                console.log(symbol, profile );
                 return <p> Loading.....</p>;
             }
             return(
@@ -74,14 +78,15 @@ class LandingAPI extends Component {
                 <Div>
                     <Ul>
                         {hits.map(summary =>                    
-                        <Li key={summary.objectID}>
-                            <A href={summary.url}>{summary.title} </A>
+                        <Li key={summary.symbol}>
+                            <A href={summary.image}>{summary.companyName}</A>
+                        <Span> {summary.description} </Span>
                             {/* <span> {summary.marketSummaryResponse.result} </span> */}
                         </Li>
                         )}
                     </Ul>
                         
-                    
+                    );}
                 </Div>
             );
     }
@@ -90,6 +95,5 @@ class LandingAPI extends Component {
 
 
 // const Messages=withFirebase(LandingAPI);
-export default LandingAPI
-
+export default Landing2;
 

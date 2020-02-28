@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from "styled-components";
 import LandingAPI from '../APIs/LandingAPI.js';
+import Landing2 from '../APIs/Landing2.js';
 
 
 const Nav = styled.div`
@@ -76,6 +77,10 @@ function Landing() {
             </Nav>
           <div>
           <LandingAPI/>
+          </div>
+
+          <div>
+          <Landing2/>
           </div>
   
         </div>
