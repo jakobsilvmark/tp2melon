@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from "styled-components";
-import LandingAPI from '../APIs/LandingAPI.js';
+import LandingAPI from '../APIs/Landin2.js';
 
 
 const Nav = styled.div`
@@ -53,34 +53,34 @@ const NavRight = styled.div`
 const MenuLink = styled.a``;
 
 function Landing() {
-    return (
-        <div>
-            <Nav>
-                <NavHeader>
-                    <NavLeft>FinActual</NavLeft>
-                    <NavCenter>
-                    <Input type="text" placeholder="Search" />
-                    </NavCenter>
-                    <NavRight>
-                    <MenuLink href="#">
-                    
-                    </MenuLink>
-                    <MenuLink href="#">
-                        
-                    </MenuLink>
-                    <MenuLink href="#">
-                        
-                    </MenuLink>
-                    </NavRight>
-                </NavHeader>
-            </Nav>
-          <div>
-          <LandingAPI/>
-          </div>
-  
-        </div>
-        
-    )
+  return (
+    <div>
+      <Nav>
+        <NavHeader>
+          <NavLeft>FinActual</NavLeft>
+          <NavCenter>
+            {/*             <Input type="text" placeholder="Search" /> */}
+          </NavCenter>
+          <NavRight>
+            <MenuLink href="#">
+
+            </MenuLink>
+            <MenuLink href="#">
+
+            </MenuLink>
+            <MenuLink href="#">
+
+            </MenuLink>
+          </NavRight>
+        </NavHeader>
+      </Nav>
+      <div>
+        <LandingAPI />
+      </div>
+
+    </div>
+
+  )
 }
 
 export default Landing
