@@ -52,6 +52,7 @@ function SignUp() {
 const initialState = {
   username: "",
   email: "",
+  bank: "",
   passwordOne: "",
   passwordTwo: "",
   isAdmin: false,
@@ -64,7 +65,7 @@ class SignUpFormBase extends Component {
     this.state = { ...initialState };
   }
   onSubmit = e => {
-    const { username, email, passwordOne, isAdmin } = this.state;
+    const { username, email, bank, passwordOne, isAdmin } = this.state;
     /*         const roles = [];
 
         if (isAdmin){
@@ -80,7 +81,7 @@ class SignUpFormBase extends Component {
       .then(authUser => {
         return this.props.firebase
           .user(authUser.user.uid)
-          .set({ username, email, roles });
+          .set({ username, email, bank, roles });
       })
       .then(() => {
         this.setState({ ...initialState });
@@ -103,6 +104,7 @@ class SignUpFormBase extends Component {
     const {
       username,
       email,
+      bank,
       passwordOne,
       passwordTwo,
       isAdmin,
@@ -113,6 +115,7 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
+      bank === "" ||
       username === "";
 
     return (
@@ -130,6 +133,13 @@ class SignUpFormBase extends Component {
           onChange={this.onChange}
           type="text"
           placeholder="Email"
+        />
+        <Input
+          name="bank"
+          value={bank}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Bank name"
         />
         <Input
           name="passwordOne"
